@@ -23,6 +23,7 @@ A modern web application for analyzing Arabic text using advanced Natural Langua
 NER-POS-Coref-Resolution-Arabic/
 │
 ├── app.py                 # Main Flask application
+├── requirements.txt       # Python dependencies
 ├── README.md             # Documentation
 │
 ├── static/
@@ -36,3 +37,5 @@ NER-POS-Coref-Resolution-Arabic/
 │
 ├── models/               # NLP models (if applicable)
 ├── utils/               # Utilities and helper functions
+└── demo/                # Screenshots and demos
+
