@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER, POS, Coreference for Arabic Language</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="main-header">
+        <h1><i class="fas fa-language"></i> NER, POS, Coreference for Arabic Language</h1>
+        <p class="subtitle">Advanced Arabic Text Analysis</p>
+    </div>
+
+    <div class="container">
+        <h1 class="section-title">NLP Text Analysis</h1>
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="input-group">
+                    <label for="textInput" class="form-label">
+                        <i class="fas fa-edit"></i> Text to Analyze
+                    </label>
+                    <textarea class="form-control" id="textInput" rows="6" placeholder="أدخل النص الخاص بك هنا... / Enter your text here..."></textarea>
+                </div>
+                
+                <div class="analysis-options">
+                    <label class="form-label">
+                        <i class="fas fa-cogs"></i> Analysis Type
+                    </label>
+                    
+                    <div class="option-card">
+                        <div class="form-check">
+                            <i class="fas fa-tags option-icon"></i>
+                            <input class="form-check-input" type="radio" name="taskRadio" id="nerRadio" value="ner">
+                            <label class="form-check-label" for="nerRadio">
+                                <strong>Named Entity Recognition (NER)</strong>
+                                <br><small>Identifies people, places, organizations, etc.</small>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card">
+                        <div class="form-check">
+                            <i class="fas fa-sitemap option-icon"></i>
+                            <input class="form-check-input" type="radio" name="taskRadio" id="posRadio" value="pos">
+                            <label class="form-check-label" for="posRadio">
+                                <strong>Part-of-Speech Tagging (POS)</strong>
+                                <br><small>Analyzes parts of speech and grammatical structure</small>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card">
+                        <div class="form-check">
+                            <i class="fas fa-link option-icon"></i>
+                            <input class="form-check-input" type="radio" name="taskRadio" id="corefRadio" value="coref">
+                            <label class="form-check-label" for="corefRadio">
+                                <strong>Coreference Resolution</strong>
+                                <br><small>Identifies references between text elements</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="analyzeBtn" class="analyze-btn">
+                    <i class="fas fa-brain"></i> Analyze
+                </button>
+                
+                <div id="loader" class="loader"></div>
+                
+                <div id="resultContainer" class="result-container" style="display: none;">
+                    <h3 id="resultTitle"><i class="fas fa-chart-line"></i> Results</h3>
+                    
+                    <div id="nerResult" style="display: none;">
+                        <h4><i class="fas fa-tags"></i> Identified Entities</h4>
+                        <div id="nerDisplay"></div>
+                        <hr>
+                        <div id="entitiesList"></div>
+                    </div>
+                    
+                    <div id="posResult" style="display: none;">
+                        <h4><i class="fas fa-sitemap"></i> Part-of-Speech Analysis</h4>
+                        <div id="posDisplay"></div>
+                    </div>
+                    
+                    <div id="corefResult" style="display: none;">
+                        <h4><i class="fas fa-link"></i> Text with Coreferences:</h4>
+                        <div id="corefDisplay"></div>
+                        <hr>
+                        <h4><i class="fas fa-check-circle"></i> Resolved Text:</h4>
+                        <div id="resolvedText"></div>
+                    </div>
+                    <button onclick="location.reload()" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> New analysis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation for option cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.option-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Update visual styles
+                    cards.forEach(c => c.style.borderColor = '#e2e8f0');
+                    this.style.borderColor = '#667eea';
+                });
+            });
+        });
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/code.js') }}"></script>
+</body>
+</html>
